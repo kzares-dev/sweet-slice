@@ -4,8 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Overview from "./Overview";
 import Notifications from "./Notifications";
 import Settings from "./Settings";
-import { Home, Book, Settings2, Bell, Plus, } from 'lucide-react-native'
-import { View } from "react-native";
+import { Home, Book, Settings2, Bell, Plus, ChevronLeft, } from 'lucide-react-native'
+import { TouchableOpacity, View } from "react-native";
 import { colors } from "@/utils/colors";
 import Entries from "./Entries";
 import Add from "./Add";
@@ -27,21 +27,47 @@ export const RootNavigator = () => {
 }
 
 const TabNavigator = () => {
-    return <TabStack.Navigator screenOptions={tabsNavigationOptions} >
+    return <TabStack.Navigator initialRouteName={SCREENS.ENTRIES} screenOptions={tabsNavigationOptions} >
         <TabStack.Screen options={{
             headerShadowVisible: false,
         }} name={SCREENS.OVERVIEW} component={Overview} />
-        <TabStack.Screen name={SCREENS.ENTRIES} component={Entries} />
-        <TabStack.Screen name={STACKS.ADD_STACK} component={AddNavigator} />
+
+        <TabStack.Screen
+            options={{
+                headerShown: false
+            }}
+            name={SCREENS.ENTRIES} component={Entries} />
+        <TabStack.Screen
+            options={{
+                headerShown: false,
+                tabBarStyle: { display: 'none' }
+            }}
+            name={STACKS.ADD_STACK} component={AddNavigator} />
         <TabStack.Screen name={SCREENS.NOTIFICATIONS} component={Notifications} />
         <TabStack.Screen name={SCREENS.SETTINGS} component={Settings} />
 
     </TabStack.Navigator>
 }
 
-const AddNavigator = () => {
-    return <AddStack.Navigator>
-        <TabStack.Screen name={SCREENS.ADD} component={Add} />
+const AddNavigator = ({ navigation }: { navigation: any }) => {
+    return <AddStack.Navigator screenOptions={{
+        headerShown: false,
+        headerStyle: { backgroundColor: colors.bgSecondary }
+    }}>
+        <TabStack.Screen
+            options={{
+                headerShown: true,
+                headerTitle: 'Create Entry',
+                headerTitleStyle: {
+                    fontSize: 20,
+                    color: '#111818',
+                },
+                headerTitleAlign: 'center',
+                headerLeft: () => {
+                    return <ChevronLeft color='#000' width={30} height={30} onPress={() => navigation.navigate(SCREENS.OVERVIEW)} />
+                }
+            }}
+            name={SCREENS.ADD} component={Add} />
     </AddStack.Navigator>
 }
 

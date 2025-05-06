@@ -1,14 +1,17 @@
-export enum ProcessStage {
-  SELECT = 'SELECT',
-  REVIEW = 'REVIEW',
+export interface Expense {
+  id: string,
+  title: string,
+  amount: number,
+  taxes?: number,
+  category: string,
+  paymentType: string,
 }
 
-export enum ComplianceUseCase {
-  PURGE_BIN = 'PURGE_BIN',
-  CASH_LOAD = 'CASH_LOAD',
-  TRAFFIC_LIGHT = 'TRAFFIC_LIGHT',
-  RECEIPT_ROLL = 'RECEIPT_ROLL',
-  CASSETE_SEAL = 'CASSETE_SEAL',
-  WINCOR_STATUS_CODE = 'WINCOR_STATUS_CODE',
-  MACHINE_IN_SERVICE_OSS = 'MACHINE_IN_SERVICE_OSS',
+export interface Income {
+  id: string,
+  title: string,
+  amount: number,
+  taxes?: number,
+  category: string,
+  paymentType: string,
 }

@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useMemo } from 'react'
 import MainLayout from '@/components/layouts/MainLayout'
-import Logo from '@/atoms/Logo'
+import Logo from '@/components/atoms/Logo'
 import HorizontalScroll from '@/components/layouts/HorizontalScroll'
-import ScrollCard from '@/atoms/ScrollCard'
+import ScrollCard from '@/components/atoms/ScrollCard'
 
 const Overview = () => {
     const pageData = useMemo(() => {
@@ -26,7 +26,7 @@ const Overview = () => {
         }
     }, [])
     return (
-        <MainLayout>
+        <MainLayout >
             <HorizontalScroll>
                 {pageData.overview.map((item, key) => {
                     return <ScrollCard
@@ -36,10 +36,14 @@ const Overview = () => {
                     />
                 })}
             </HorizontalScroll>
+
+           
         </MainLayout>
     )
 }
 
 export default Overview
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    
+})
